@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Challenge.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Challenge
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewFor<LoginViewModel>();
         }
     }
 }

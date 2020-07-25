@@ -11,9 +11,7 @@ namespace Challenge.ViewModels
     {
         private string _username;
         private string _password;
-        private ShellViewModel shellVM;
-        private HomeViewModel homeVM;
-
+        
         public string Username
         {
             get { return _username; }

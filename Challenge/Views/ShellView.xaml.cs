@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace Challenge.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class ShellView : Window
     {
-        public LoginView()
+        public ShellView()
         {
             InitializeComponent();
         }

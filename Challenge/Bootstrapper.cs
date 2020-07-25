@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
+using Challenge.Helpers;
 using Challenge.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Challenge
 {
@@ -14,6 +16,10 @@ namespace Challenge
         public Bootstrapper()
         {
             Initialize();
+            ConventionManager.AddElementConvention<PasswordBox>(
+                PasswordBoxHelper.BoundPasswordProperty,
+                "Password",
+                "PasswordChanged");
         }
 
         protected override void Configure()
@@ -34,7 +40,7 @@ namespace Challenge
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewFor<LoginViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

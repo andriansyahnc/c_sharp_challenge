@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_File">
                 <MenuItem Header="_Logout"></MenuItem>
             </MenuItem>
         </Menu>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Home" Height="50"></MenuItem>
-            <MenuItem Header="_User"></MenuItem>
+            <MenuItem Header="_Home" x:Name="HomeMenu" Height="50"></MenuItem>
+            <MenuItem Header="_User" x:Name="CustomerMenu"></MenuItem>
         </Menu>
         <Grid>
             <ContentControl x:Name="ActiveItem" Margin="10" />

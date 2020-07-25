@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ChallengeData
+namespace Challenge.ViewModels
 {
-    class Program
+    public class CustomerViewModel
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

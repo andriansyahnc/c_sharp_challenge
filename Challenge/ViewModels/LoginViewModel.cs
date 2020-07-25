@@ -47,7 +47,9 @@ namespace Challenge.ViewModels
         }
 
         public void LogIn(string username, string password) {
-            
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(new ShellViewModel(), null, null);
+            TryClose();
         }
 
     }

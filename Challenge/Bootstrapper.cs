@@ -42,7 +42,12 @@ namespace Challenge
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<LoginViewModel>();
+            if (Session.Id > 0) {
+                DisplayRootViewFor<ShellViewModel>();
+            } else
+            {
+                DisplayRootViewFor<LoginViewModel>();
+            }
         }
 
         protected override object GetInstance(Type service, string key)

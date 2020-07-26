@@ -53,7 +53,7 @@ namespace Challenge.ViewModels
             if (users.Id != 0)
             {
                 IWindowManager manager = new WindowManager();
-                manager.ShowWindow(new ShellViewModel(), null, null);
+                manager.ShowWindow(new ShellViewModel(_sessionHelper), null, null);
                 TryClose();
             }
             else {

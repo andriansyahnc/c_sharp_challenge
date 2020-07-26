@@ -4,26 +4,41 @@ using Challenge.Models;
 using Devart.Data.MySql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Windows;
 
 namespace Challenge.ViewModels
 {
-    public class CustomerViewModel: Screen
+    public class CustomerViewModel : Screen, INotifyPropertyChanged
     {
         private DataView customerData;
-        
+        private IWindowManager manager;
+
+        private CustomerModel _selectedItem;
+
+        public CustomerModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set { _selectedItem = value; NotifyOfPropertyChange(() => SelectedItem); }
+        }
+
+
         public BindableCollection<CustomerModel> Customer { get; set; }
 
         public CustomerViewModel()
         {
             Customer = new BindableCollection<CustomerModel>(GetCustomer());
+            manager = new WindowManager();
         }
 
         public DataView CustomerData
         {
             get { return customerData; }
-            set {
-                if (customerData == value) {
+            set
+            {
+                if (customerData == value)
+                {
                     return;
                 }
                 customerData = value;
@@ -31,7 +46,8 @@ namespace Challenge.ViewModels
             }
         }
 
-        private List<CustomerModel> GetCustomer() {
+        private List<CustomerModel> GetCustomer()
+        {
             List<CustomerModel> customers = new List<CustomerModel>();
             string connectionString = DBHelper.GetConnectionString();
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -58,17 +74,19 @@ namespace Challenge.ViewModels
             return customers;
         }
 
-        public void RefreshMenu() {
+        public void RefreshMenu()
+        {
             Customer = new BindableCollection<CustomerModel>(GetCustomer());
         }
 
-        public void AddMenu() { 
-        
+        public void AddMenu()
+        {
+            manager.ShowWindow(new CreateUpdateViewModel(), null, null);
         }
 
         public void EditMenu()
         {
-
+            manager.ShowWindow(new CreateUpdateViewModel(SelectedItem), null, null);
         }
     }
 }

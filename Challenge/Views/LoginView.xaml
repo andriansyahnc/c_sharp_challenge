@@ -20,7 +20,8 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 20"
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" 
+                   Margin="0 0 0 20"
                    HorizontalAlignment="Center" FontSize="64">
             Login Form
         </TextBlock>

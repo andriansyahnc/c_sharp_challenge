@@ -76,7 +76,8 @@
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\ISessionHelper.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="Models\AuthenticatedUsers.cs" />
+    <Compile Include="Helpers\Session.cs" />
+    <Compile Include="ViewModels\AuthenticatedUsers.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="ViewModels\CreateUpdateViewModel.cs" />

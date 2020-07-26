@@ -3,5 +3,6 @@
     public interface ISessionHelper
     {
         AuthenticatedUsers Authenticate(string username, string password);
+        bool IsAuthenticated();
     }
 }

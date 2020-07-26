@@ -7,14 +7,22 @@ namespace Challenge.Models
     public class SessionHelper : ISessionHelper
     {
         private string _connectionString;
+        private AuthenticatedUsers user;
         public SessionHelper()
         {
             _connectionString = DBHelper.GetConnectionString();
         }
 
+        public bool IsAuthenticated() {
+            if (Session.Id > 0) {
+                return true;
+            }
+            return false;
+        }
+
         public AuthenticatedUsers Authenticate(string username, string password)
         {
-            AuthenticatedUsers user = new AuthenticatedUsers();
+            user = new AuthenticatedUsers();
             MySqlConnection conn = new MySqlConnection(_connectionString);
             try
             {
@@ -27,6 +35,7 @@ namespace Challenge.Models
                 {
                     user.Username = reader.GetString("username");
                     user.Id = reader.GetInt32("id");
+                    Session.Id = user.Id;
                 }
 
             }

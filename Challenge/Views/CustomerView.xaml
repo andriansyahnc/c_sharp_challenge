@@ -19,7 +19,9 @@
             </Grid.ColumnDefinitions>
         </Grid>
 
-        <DataGrid x:Name="Customer" Grid.Column="0" IsReadOnly="True"></DataGrid>
+        <DataGrid x:Name="Customer" Grid.Column="0" IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DataGrid>
         <DockPanel Grid.Column="1">
             <TextBlock>HI</TextBlock>
         </DockPanel>

@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using Challenge.Models;
+using Challenge.ViewModels;
 
 namespace Challenge.ViewModels
 {
@@ -7,8 +9,12 @@ namespace Challenge.ViewModels
         private HomeViewModel _homeVM;
         private CustomerViewModel _customerVM;
 
-        public ShellViewModel()
+        public ShellViewModel(ISessionHelper _session)
         {
+            if (_session.IsAuthenticated() != true) {
+                IWindowManager manager = new WindowManager();
+                manager.ShowWindow(new LoginViewModel(_session), null, null);
+            }
             _homeVM = new HomeViewModel();
             ActivateItem(_homeVM);
         }

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Challenge.Helpers;
+using Challenge.Models;
 using Challenge.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace Challenge
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ISessionHelper, SessionHelper>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

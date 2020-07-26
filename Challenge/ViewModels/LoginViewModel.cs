@@ -1,9 +1,6 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using Challenge.Models;
+using System.Windows;
 
 namespace Challenge.ViewModels
 {
@@ -11,6 +8,12 @@ namespace Challenge.ViewModels
     {
         private string _username;
         private string _password;
+        private ISessionHelper _sessionHelper;
+
+        public LoginViewModel(ISessionHelper sessionHelper)
+        {
+            _sessionHelper = sessionHelper;
+        }
         
         public string Username
         {
@@ -44,10 +47,18 @@ namespace Challenge.ViewModels
             }
         }
 
-        public void LogIn(string username, string password) {
-            IWindowManager manager = new WindowManager();
-            manager.ShowWindow(new ShellViewModel(), null, null);
-            TryClose();
+        public void LogIn() {
+            AuthenticatedUsers users = _sessionHelper.Authenticate(Username, Password);
+
+            if (users.Id != 0)
+            {
+                IWindowManager manager = new WindowManager();
+                manager.ShowWindow(new ShellViewModel(), null, null);
+                TryClose();
+            }
+            else {
+                MessageBox.Show("Credential not found", "OK");
+            }
         }
 
     }

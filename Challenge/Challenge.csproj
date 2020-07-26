@@ -74,12 +74,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Helpers\ISessionHelper.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Models\AuthenticatedUsers.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Helpers\SessionHelper.cs" />
+    <Compile Include="ViewModels\CreateUpdateViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\CreateUpdateView.xaml.cs">
+      <DependentUpon>CreateUpdateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +128,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\CreateUpdateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

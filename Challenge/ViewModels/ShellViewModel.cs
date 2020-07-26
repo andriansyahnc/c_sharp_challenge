@@ -1,9 +1,4 @@
 ﻿using Caliburn.Micro;
-using Challenge.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Challenge.ViewModels
 {

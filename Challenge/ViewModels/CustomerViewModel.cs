@@ -5,15 +5,13 @@ using Devart.Data.MySql;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Challenge.ViewModels
 {
     public class CustomerViewModel: Screen
     {
         private DataView customerData;
-
+        
         public BindableCollection<CustomerModel> Customer { get; set; }
 
         public CustomerViewModel()
@@ -60,5 +58,17 @@ namespace Challenge.ViewModels
             return customers;
         }
 
+        public void RefreshMenu() {
+            Customer = new BindableCollection<CustomerModel>(GetCustomer());
+        }
+
+        public void AddMenu() { 
+        
+        }
+
+        public void EditMenu()
+        {
+
+        }
     }
 }

@@ -41,25 +41,32 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <!--ID-->
                 <TextBlock Grid.Row="0" Grid.Column="1" MinWidth="50"
                            Margin="0 10 10 10">ID</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="2" MinWidth="100"
-                         Margin="0 10 0 10"></TextBox>
+                         Margin="0 10 0 10" x:Name="FilterID"></TextBox>
 
                 <!--FirstName-->
                 <TextBlock Grid.Row="1" Grid.Column="1" MinWidth="50"
                            Margin="0 10 10 10">FirstName</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="2" MinWidth="100"
-                         Margin="0 10 0 10"></TextBox>
+                         Margin="0 10 0 10" x:Name="FilterFirstName"></TextBox>
 
                 <!--LastName-->
                 <TextBlock Grid.Row="2" Grid.Column="1" MinWidth="50"
                            Margin="0 10 10 10">LastName</TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="2" MinWidth="100"
-                         Margin="0 10 0 10"></TextBox>
+                         Margin="0 10 0 10" x:Name="FilterLastName"></TextBox>
+
+                <!--Button-->
+                <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                        x:Name="FilterButton">
+                    Save
+                </Button>
             </Grid>
         </DockPanel>
     </DockPanel>

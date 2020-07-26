@@ -1,13 +1,12 @@
 ﻿using Caliburn.Micro;
-using Challenge.EventModels;
 using Challenge.Helpers;
 using Challenge.Models;
 using Devart.Data.MySql;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Windows;
+using System.Linq;
+using System.Text;
 
 namespace Challenge.ViewModels
 {
@@ -18,6 +17,43 @@ namespace Challenge.ViewModels
         private IEventAggregator _events;
 
         private CustomerModel _selectedItem;
+
+        private int _filterId = 0;
+        private string _filterFirstName = "";
+        private string _filterLastName = "";
+
+        public string FilterLastName
+        {
+            get { return _filterLastName; }
+            set
+            {
+                _filterLastName = value;
+                NotifyOfPropertyChange(() => FilterLastName);
+            }
+        }
+
+
+        public string FilterFirstName
+        {
+            get { return _filterFirstName; }
+            set
+            {
+                _filterFirstName = value;
+                NotifyOfPropertyChange(() => FilterFirstName);
+            }
+        }
+
+
+        public int FilterID
+        {
+            get { return _filterId; }
+            set
+            {
+                _filterId = value;
+                NotifyOfPropertyChange(() => FilterID);
+            }
+        }
+
 
         public CustomerModel SelectedItem
         {
@@ -56,7 +92,33 @@ namespace Challenge.ViewModels
             try
             {
                 conn.Open();
-                MySqlCommand command = new MySqlCommand("SELECT id, first_name, last_name FROM customer", conn);
+                List<string> where = new List<string>();
+                StringBuilder query = new StringBuilder("SELECT id, first_name, last_name FROM customer");
+                Dictionary<string, string> whereParams = new Dictionary<string, string>();
+                if (FilterID > 0) {
+                    where.Add("ID = @Id");
+                    whereParams.Add("@Id", FilterID.ToString());
+                }
+                if (FilterFirstName != "")
+                {
+                    where.Add("first_name LIKE @First");
+                    whereParams.Add("@First", "%" + FilterFirstName + "%");
+                }
+                if (FilterLastName != "")
+                {
+                    where.Add("last_name LIKE @Last");
+                    whereParams.Add("@Last", "%" + FilterLastName + "%");
+                }
+                
+                if (where.Count > 0)
+                {
+                    query.Append(" WHERE " + String.Join(" AND ", where.ToArray()));
+                }
+
+                MySqlCommand command = new MySqlCommand(query.ToString(), conn);
+                foreach (var param in whereParams.ToArray()) {
+                    command.Parameters.Add(param.Key, param.Value);
+                }
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -77,11 +139,6 @@ namespace Challenge.ViewModels
             return customers;
         }
 
-        public void RefreshMenu()
-        {
-            Customer = new BindableCollection<CustomerModel>(GetCustomer());
-        }
-
         public void AddMenu()
         {
             manager.ShowWindow(new CreateUpdateViewModel(_events), null, null);
@@ -95,6 +152,11 @@ namespace Challenge.ViewModels
         public void DeleteMenu()
         {
             manager.ShowWindow(new DialogueViewModel(_events, SelectedItem), null, null);
+        }
+
+        public void FilterButton() {
+            Customer = new BindableCollection<CustomerModel>(GetCustomer());
+            Console.WriteLine("Ganteng");
         }
 
     }

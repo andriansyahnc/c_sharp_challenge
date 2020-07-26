@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Challenge.Views"
-        mc:Ignorable="d"  FontSize="24"
-        Title="LoginView" Height="450" Width="800">
+        mc:Ignorable="d"  FontSize="16"
+        Title="LoginView" Height="300" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" 
                    Margin="0 0 0 20"
-                   HorizontalAlignment="Center" FontSize="64">
+                   HorizontalAlignment="Center" FontSize="36">
             Login Form
         </TextBlock>
 
@@ -41,8 +41,8 @@
                      x:Name="Password" Margin="0 0 0 10" />
 
         <!-- Login -->
-        <Button Grid.Row="3" Grid.Column="1" Padding="10" 
-                HorizontalAlignment="Center" Grid.ColumnSpan="2" x:Name="LogIn">
+        <Button Grid.Row="3" Grid.Column="1" Padding="5" 
+                HorizontalAlignment="Left" Grid.ColumnSpan="2" x:Name="LogIn">
             Login
         </Button>
     </Grid>

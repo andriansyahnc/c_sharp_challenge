@@ -25,7 +25,6 @@ namespace Challenge.ViewModels
             set { _selectedItem = value; NotifyOfPropertyChange(() => SelectedItem); }
         }
 
-
         public BindableCollection<CustomerModel> Customer { get; set; }
 
         public CustomerViewModel(IEventAggregator events)
@@ -91,6 +90,11 @@ namespace Challenge.ViewModels
         public void EditMenu()
         {
             manager.ShowWindow(new CreateUpdateViewModel(_events, SelectedItem), null, null);
+        }
+
+        public void DeleteMenu()
+        {
+            manager.ShowWindow(new DialogueViewModel(_events, SelectedItem), null, null);
         }
 
     }

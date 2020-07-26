@@ -133,6 +133,8 @@ namespace Challenge.ViewModels
             }
         }
 
-        public void Cancel() { }
+        public void Cancel() {
+            TryClose();
+        }
     }
 }

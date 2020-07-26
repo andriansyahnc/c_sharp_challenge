@@ -18,15 +18,34 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="Title"
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TextTitle"
                    Margin="0 10 0 5" HorizontalAlignment="Center" FontSize="18">
             Add Data Customer
         </TextBlock>
+
+        <!-- id -->
+        <TextBlock Grid.Row="1" Grid.Column="1" Visibility="{Binding IsVisible}">ID</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="2" MinWidth="100" x:Name="Id" Margin="0 5" 
+                 Visibility="{Binding IsVisible}"
+                 IsReadOnly="True"></TextBox>
         <!-- firstname -->
-        <TextBlock Grid.Row="1" Grid.Column="1">FirstName</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="2" MinWidth="100" x:Name="FirstName" 
-                 Text="{Binding Customer.FirstName}"></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="1">FirstName</TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="100" x:Name="FirstName" Margin="0 5"></TextBox>
+
+        <!-- lastname -->
+        <TextBlock Grid.Row="3" Grid.Column="1">LastName</TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="2" MinWidth="100" x:Name="LastName" Margin="0 5"></TextBox>
+
+        <Button Grid.Row="4" Grid.Column="1" Padding="10" 
+                HorizontalAlignment="Left" Grid.ColumnSpan="2" x:Name="Save">
+            Save
+        </Button>
+        <Button Grid.Row="4" Grid.Column="2" Padding="10" 
+                HorizontalAlignment="Left" Grid.ColumnSpan="2" x:Name="Cancel">
+            Cancel
+        </Button>
     </Grid>
 </Window>

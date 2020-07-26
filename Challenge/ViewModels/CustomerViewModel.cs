@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Challenge.EventModels;
 using Challenge.Helpers;
 using Challenge.Models;
 using Devart.Data.MySql;
@@ -10,10 +11,11 @@ using System.Windows;
 
 namespace Challenge.ViewModels
 {
-    public class CustomerViewModel : Screen, INotifyPropertyChanged
+    public class CustomerViewModel : Screen
     {
         private DataView customerData;
         private IWindowManager manager;
+        private IEventAggregator _events;
 
         private CustomerModel _selectedItem;
 
@@ -26,8 +28,9 @@ namespace Challenge.ViewModels
 
         public BindableCollection<CustomerModel> Customer { get; set; }
 
-        public CustomerViewModel()
+        public CustomerViewModel(IEventAggregator events)
         {
+            _events = events;
             Customer = new BindableCollection<CustomerModel>(GetCustomer());
             manager = new WindowManager();
         }
@@ -54,7 +57,7 @@ namespace Challenge.ViewModels
             try
             {
                 conn.Open();
-                MySqlCommand command = new MySqlCommand("SELECT id, first_name FROM customer", conn);
+                MySqlCommand command = new MySqlCommand("SELECT id, first_name, last_name FROM customer", conn);
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -62,6 +65,7 @@ namespace Challenge.ViewModels
                         CustomerModel model = new CustomerModel();
                         model.Id = reader.GetInt32("id");
                         model.FirstName = reader.GetString("first_name");
+                        model.LastName = reader.GetString("last_name");
                         customers.Add(model);
                     }
                 }
@@ -81,12 +85,13 @@ namespace Challenge.ViewModels
 
         public void AddMenu()
         {
-            manager.ShowWindow(new CreateUpdateViewModel(), null, null);
+            manager.ShowWindow(new CreateUpdateViewModel(_events), null, null);
         }
 
         public void EditMenu()
         {
-            manager.ShowWindow(new CreateUpdateViewModel(SelectedItem), null, null);
+            manager.ShowWindow(new CreateUpdateViewModel(_events, SelectedItem), null, null);
         }
+
     }
 }

@@ -9,16 +9,19 @@ namespace Challenge.ViewModels
         private string _username;
         private string _password;
         private ISessionHelper _sessionHelper;
+        private IEventAggregator _events;
 
-        public LoginViewModel(ISessionHelper sessionHelper)
+        public LoginViewModel(ISessionHelper sessionHelper, IEventAggregator events)
         {
             _sessionHelper = sessionHelper;
+            _events = events;
         }
-        
+
         public string Username
         {
             get { return _username; }
-            set {
+            set
+            {
                 _username = value;
                 NotifyOfPropertyChange(() => Username);
                 NotifyOfPropertyChange(() => CanLogIn);
@@ -28,14 +31,16 @@ namespace Challenge.ViewModels
         public string Password
         {
             get { return _password; }
-            set {
+            set
+            {
                 _password = value;
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogIn);
             }
         }
 
-        public bool CanLogIn {
+        public bool CanLogIn
+        {
             get
             {
                 bool output = false;
@@ -47,16 +52,18 @@ namespace Challenge.ViewModels
             }
         }
 
-        public void LogIn() {
+        public void LogIn()
+        {
             AuthenticatedUsers users = _sessionHelper.Authenticate(Username, Password);
 
             if (users.Id != 0)
             {
                 IWindowManager manager = new WindowManager();
-                manager.ShowWindow(new ShellViewModel(_sessionHelper), null, null);
+                manager.ShowWindow(new ShellViewModel(_sessionHelper, _events), null, null);
                 TryClose();
             }
-            else {
+            else
+            {
                 MessageBox.Show("Credential not found", "OK");
             }
         }

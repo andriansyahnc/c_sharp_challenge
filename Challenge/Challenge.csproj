@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EventModels\CustomerTransactionEvent.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\ISessionHelper.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />

@@ -61,7 +61,18 @@ namespace Challenge.ViewModels
             set { _selectedItem = value; NotifyOfPropertyChange(() => SelectedItem); }
         }
 
-        public BindableCollection<CustomerModel> Customer { get; set; }
+        private BindableCollection<CustomerModel> customerModel;
+
+        public BindableCollection<CustomerModel> Customer
+        {
+            get { return customerModel; }
+            set
+            {
+                customerModel = value;
+                NotifyOfPropertyChange(() => Customer);
+            }
+        }
+
 
         public CustomerViewModel(IEventAggregator events)
         {
@@ -95,7 +106,8 @@ namespace Challenge.ViewModels
                 List<string> where = new List<string>();
                 StringBuilder query = new StringBuilder("SELECT id, first_name, last_name FROM customer");
                 Dictionary<string, string> whereParams = new Dictionary<string, string>();
-                if (FilterID > 0) {
+                if (FilterID > 0)
+                {
                     where.Add("ID = @Id");
                     whereParams.Add("@Id", FilterID.ToString());
                 }
@@ -109,14 +121,15 @@ namespace Challenge.ViewModels
                     where.Add("last_name LIKE @Last");
                     whereParams.Add("@Last", "%" + FilterLastName + "%");
                 }
-                
+
                 if (where.Count > 0)
                 {
                     query.Append(" WHERE " + String.Join(" AND ", where.ToArray()));
                 }
 
                 MySqlCommand command = new MySqlCommand(query.ToString(), conn);
-                foreach (var param in whereParams.ToArray()) {
+                foreach (var param in whereParams.ToArray())
+                {
                     command.Parameters.Add(param.Key, param.Value);
                 }
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -154,7 +167,8 @@ namespace Challenge.ViewModels
             manager.ShowWindow(new DialogueViewModel(_events, SelectedItem), null, null);
         }
 
-        public void FilterButton() {
+        public void FilterButton()
+        {
             Customer = new BindableCollection<CustomerModel>(GetCustomer());
             Console.WriteLine("Ganteng");
         }
